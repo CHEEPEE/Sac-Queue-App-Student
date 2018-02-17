@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sacequeue.sace_queueapp.SignUpActivity">
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_corner_withbackground"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inpt_cnfrm_password" />
+
+    <EditText
+        android:id="@+id/input_student_number"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:background="@drawable/round_corner"
+        android:drawableLeft="@drawable/ic_assignment_ind_black_24dp"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorPrimary"
+        android:ems="10"
+        android:hint="Student Number"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/inpt_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/inpt_email"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="216dp"
+        android:background="@drawable/round_corner"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorPrimary"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/inpt_cnfrm_password"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_corner"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorPrimary"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/inpt_email"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inpt_email"
+        app:layout_constraintTop_toBottomOf="@+id/inpt_password" />
+    <EditText
+        android:drawablePadding="10dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="Password"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:drawableTint="@color/colorPrimary"
+        android:paddingLeft="10dp"
+        android:id="@+id/inpt_password"
+        android:layout_width="0dp"
+        android:background="@drawable/round_corner"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/inpt_email"
+        app:layout_constraintStart_toStartOf="@+id/inpt_email"
+        app:layout_constraintTop_toBottomOf="@+id/inpt_email" />
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sacequeue.sace_queueapp.LoginActivity">
+
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/round_corner_withbackground"
+        android:text="Log in"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inpt_password" />
+
+    <EditText
+        android:id="@+id/inpt_email"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="156dp"
+        android:hint="Email"
+        android:drawablePadding="10dp"
+        android:paddingLeft="10dp"
+        android:background="@drawable/round_corner"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:drawableTint="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:drawablePadding="10dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="Password"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:drawableTint="@color/colorPrimary"
+        android:paddingLeft="10dp"
+        android:id="@+id/inpt_password"
+        android:layout_width="0dp"
+        android:background="@drawable/round_corner"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/inpt_email"
+        app:layout_constraintStart_toStartOf="@+id/inpt_email"
+        app:layout_constraintTop_toBottomOf="@+id/inpt_email" />
+
+    <TextView
+        android:id="@+id/lblneed_act"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Need Account?"
+        app:layout_constraintEnd_toEndOf="@+id/loginButton"
+        app:layout_constraintStart_toStartOf="@+id/loginButton"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+    <TextView
+        android:id="@+id/btnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_corner_withbackground"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:text="Sign Up"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="@+id/lblneed_act"
+        app:layout_constraintStart_toStartOf="@+id/lblneed_act"
+        app:layout_constraintTop_toBottomOf="@+id/lblneed_act" />
+
+</android.support.constraint.ConstraintLayout>
