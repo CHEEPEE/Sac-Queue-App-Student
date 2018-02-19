@@ -7,7 +7,7 @@
     tools:context="com.sacequeue.sace_queueapp.SignUpActivity">
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/signUpBtn"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
@@ -15,6 +15,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/round_corner_withbackground"
         android:text="Sign Up"
+        android:enabled="false"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
