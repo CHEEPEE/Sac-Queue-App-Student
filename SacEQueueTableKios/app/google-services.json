@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "654094023765",
+    "firebase_url": "https://cashier-queing-system.firebaseio.com",
+    "project_id": "cashier-queing-system",
+    "storage_bucket": "cashier-queing-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654094023765:android:0e65616d00c4487b",
+        "android_client_info": {
+          "package_name": "com.sacequeue.sace_queueapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654094023765-cj4a99lkrghbvp8ka0b7g9mnd83b538b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sacequeue.sace_queueapp",
+            "certificate_hash": "7c459a08b1abaca944ad265fe7cba80b03505d2c"
+          }
+        },
+        {
+          "client_id": "654094023765-61iu5r1gnk709scm4b3incpj60bopjm3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqcdXMAaD5wYoNgkiuhTS92ufdxJrGTo8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654094023765-61iu5r1gnk709scm4b3incpj60bopjm3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654094023765:android:2dc7fb10f4c20844",
+        "android_client_info": {
+          "package_name": "com.saccashierqueue.sace_queuetablekios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654094023765-joldndfeahaomhjdcji84pcq2ullstc1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saccashierqueue.sace_queuetablekios",
+            "certificate_hash": "7c459a08b1abaca944ad265fe7cba80b03505d2c"
+          }
+        },
+        {
+          "client_id": "654094023765-61iu5r1gnk709scm4b3incpj60bopjm3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqcdXMAaD5wYoNgkiuhTS92ufdxJrGTo8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654094023765-61iu5r1gnk709scm4b3incpj60bopjm3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

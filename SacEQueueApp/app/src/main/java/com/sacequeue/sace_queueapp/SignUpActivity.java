@@ -128,12 +128,6 @@ public class SignUpActivity extends AppCompatActivity {
                                     System.out.println("Firebase User Write: "+e);
                                 }
                             });
-                          /*  String key = mDatabase.push().getKey();
-                            CategoryMapModel categoryMapModel = new CategoryMapModel(key,dialog.getInputEditText().getText().toString());
-                            Map<String,Object> categoryVal = categoryMapModel.toMap();
-                            Map<String,Object> childUpdate = new HashMap<>();
-                            childUpdate.put(key,categoryVal);
-                            mDatabase.child(Utils.storeItemCategory).child(mAuth.getCurrentUser().getUid()).updateChildren(childUpdate);*/
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -146,6 +140,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private Boolean validateForm(EditText student_number, EditText email, EditText password,EditText confirmpassword){
         boolean valid = true;
         String name = student_number.getText().toString();

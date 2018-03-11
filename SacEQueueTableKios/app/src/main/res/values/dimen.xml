@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="buttonDimen">80sp</dimen>
+    <dimen name="textNmbrBtnSize">60sp</dimen>
+
+
+</resources>
