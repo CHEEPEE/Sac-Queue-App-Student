@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by Keji's Lab on 19/01/2018.
  */
 
-public class TransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter<TransactionActivityRecyclerViewAdapter.MyViewHolder> {
+public class UnfixTransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter<UnfixTransactionActivityRecyclerViewAdapter.MyViewHolder> {
     private ArrayList<TransactionOptionDataModel> transactionOptionDataModelArrayList;
     private Context context;
     private ArrayList<Boolean> getNull;
@@ -32,13 +32,12 @@ public class TransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter
 
         public MyViewHolder(View view){
             super(view);
-                lblTransactionCost = (TextView) view.findViewById(R.id.transactionCost);
+            lblTransactionCost = (TextView) view.findViewById(R.id.transactionCost);
                 lblTransactionOptionItem = (TextView) view.findViewById(R.id.transactionListOptions);
-
         }
     }
 
-    public TransactionActivityRecyclerViewAdapter(Context c, ArrayList<TransactionOptionDataModel> transactionmodel){
+    public UnfixTransactionActivityRecyclerViewAdapter(Context c, ArrayList<TransactionOptionDataModel> transactionmodel){
         this.transactionOptionDataModelArrayList = transactionmodel;
         this.context = c;
     }
@@ -53,7 +52,6 @@ public class TransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         TransactionOptionDataModel transactionOptionDataModel = transactionOptionDataModelArrayList.get(position);
-
         holder.lblTransactionOptionItem.setText(transactionOptionDataModel.getTrasactionName());
         holder.lblTransactionOptionItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +59,7 @@ public class TransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter
                 mOnItemClickLitener.onItemClick(holder.itemView,position);
             }
         });
-        holder.lblTransactionCost.setText("Php "+transactionOptionDataModel.getTransactionCost());
+        holder.lblTransactionCost.setText("");
     }
     @Override
     public int getItemCount() {

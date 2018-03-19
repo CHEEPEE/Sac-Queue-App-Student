@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by Keji's Lab on 19/01/2018.
  */
 
-public class TransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter<TransactionActivityRecyclerViewAdapter.MyViewHolder> {
+public class SelectedTransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter<SelectedTransactionActivityRecyclerViewAdapter.MyViewHolder> {
     private ArrayList<TransactionOptionDataModel> transactionOptionDataModelArrayList;
     private Context context;
     private ArrayList<Boolean> getNull;
@@ -27,25 +27,24 @@ public class TransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter
     private FirebaseAuth mAuth;
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-       public TextView lblTransactionOptionItem,lblTransactionCost;
+       public TextView lblTransactionOptionItem,lblTransactionPrice;
 
 
         public MyViewHolder(View view){
             super(view);
-                lblTransactionCost = (TextView) view.findViewById(R.id.transactionCost);
                 lblTransactionOptionItem = (TextView) view.findViewById(R.id.transactionListOptions);
-
+                lblTransactionPrice = (TextView) view.findViewById(R.id.transactionPrice);
         }
     }
 
-    public TransactionActivityRecyclerViewAdapter(Context c, ArrayList<TransactionOptionDataModel> transactionmodel){
+    public SelectedTransactionActivityRecyclerViewAdapter(Context c, ArrayList<TransactionOptionDataModel> transactionmodel){
         this.transactionOptionDataModelArrayList = transactionmodel;
         this.context = c;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.checkbox_transaction_option_list_row,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.selected_transaction_option_list,parent,false);
 
         return new MyViewHolder(itemView);
     }
@@ -53,21 +52,20 @@ public class TransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         TransactionOptionDataModel transactionOptionDataModel = transactionOptionDataModelArrayList.get(position);
-
         holder.lblTransactionOptionItem.setText(transactionOptionDataModel.getTrasactionName());
+       holder.lblTransactionPrice.setText(transactionOptionDataModel.getTransactionCost()+"");
+      //  System.out.println(transactionOptionDataModel.getTransactionCost());
         holder.lblTransactionOptionItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mOnItemClickLitener.onItemClick(holder.itemView,position);
             }
         });
-        holder.lblTransactionCost.setText("Php "+transactionOptionDataModel.getTransactionCost());
     }
     @Override
     public int getItemCount() {
         return transactionOptionDataModelArrayList.size();
     }
-
 
     @Override
     public long getItemId(int position) {
@@ -82,15 +80,15 @@ public class TransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter
         void onItemLongClick(View view, int posistion);
     }
 
-    private OnItemClickLitener mOnItemClickLitener;
+    private TransactionActivityRecyclerViewAdapter.OnItemClickLitener mOnItemClickLitener;
 
-    public void setOnItemClickListener(OnItemClickLitener mOnItemClickLitener) {
+    public void setOnItemClickListener(TransactionActivityRecyclerViewAdapter.OnItemClickLitener mOnItemClickLitener) {
         this.mOnItemClickLitener = mOnItemClickLitener;
     }
 
-    private OnItemLongClickListener monItemLongClickListener;
+    private TransactionActivityRecyclerViewAdapter.OnItemLongClickListener monItemLongClickListener;
 
-    public void setonItemLongClickListener(OnItemLongClickListener monItemLongClickListener){
+    public void setonItemLongClickListener(TransactionActivityRecyclerViewAdapter.OnItemLongClickListener monItemLongClickListener){
         this.monItemLongClickListener = monItemLongClickListener;
     }
 }

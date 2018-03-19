@@ -19,6 +19,7 @@
         app:layout_constraintBottom_toTopOf="@+id/labelWindow1"
         app:layout_constraintEnd_toEndOf="@+id/labelWindow1"
         app:layout_constraintStart_toStartOf="@+id/labelWindow1" />
+
     <TextView
         android:id="@+id/labelWindow1"
         android:layout_width="wrap_content"
@@ -26,13 +27,11 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Window 1"
         android:textSize="70sp"
-        app:layout_constraintBottom_toTopOf="@+id/labelWindow2"
+        app:layout_constraintBottom_toTopOf="@+id/labelwindow2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/labelwindow2"
@@ -67,28 +66,44 @@
         android:id="@+id/labelwindow3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Window 3"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/labelWindow3"
         app:layout_constraintEnd_toEndOf="@+id/labelWindow3"
-        app:layout_constraintStart_toStartOf="@+id/labelWindow3" />
+        app:layout_constraintStart_toStartOf="@+id/labelWindow3"
+        app:layout_constraintTop_toBottomOf="@+id/labelWindow2" />
+
     <TextView
         android:id="@+id/labelWindow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Window 3"
+        android:textSize="70sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelwindow3" />
+
+    <TextView
+        android:id="@+id/userQueueNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Window 3"
-        android:textSize="70sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Number"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/labelwindow1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelWindow2" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

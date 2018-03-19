@@ -121,6 +121,7 @@ public class InputStudentNumberActivity extends AppCompatActivity {
                     Utils.errorMessageDialog(context,"Check Inputed Student Number");
                 }else {
                     Intent i = new Intent(context,TransactionSelection.class);
+                    i.putExtra("studentNumber",inputStudentNumber.getText().toString());
                     startActivity(i);
                     finish();
                 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.saccashierqueue.sace_queuetablekios.TransactionListManagement">
+    tools:context="com.saccashierqueue.sace_queuetablekios.transactionOptionManagements.TransactionListManagement">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -48,12 +48,19 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/transactionoptionsRL"
-        android:layout_width="0dp"
+        android:layout_width="300sp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/conLayHead"></android.support.v7.widget.RecyclerView>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/transactionOptionListUnfix"
+        android:layout_width="300sp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/transactionoptionsRL"
+        app:layout_constraintStart_toEndOf="@+id/transactionoptionsRL"
+        app:layout_constraintTop_toTopOf="@+id/transactionoptionsRL"></android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

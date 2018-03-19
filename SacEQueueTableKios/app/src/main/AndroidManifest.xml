@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".InputStudentNumberActivity" />
         <activity android:name=".transactionSelectionActivty.TransactionSelection" />
-        <activity android:name=".TransactionListManagement" />
+        <activity android:name=".transactionOptionManagements.TransactionListManagement" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".Dashboard"></activity>
     </application>

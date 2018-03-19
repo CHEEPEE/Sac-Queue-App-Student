@@ -14,22 +14,24 @@ import java.util.Map;
  */
 
 public class TransactionOptionMapModel {
-    public String userId;
-    public String studentNumber;
+    public String key;
+    public String transactionName;
+    public int transactionCost;
 
     public TransactionOptionMapModel(){
 
     }
-    public TransactionOptionMapModel(String userId, String studentNumber){
-        this.studentNumber = studentNumber;
-        this.userId = userId;
+    public TransactionOptionMapModel(String key, String name, int cost){
+        this.key = key;
+        this.transactionName = name;
+        this.transactionCost =cost;
     }
     @Exclude
     public Map<String,Object> toMap(){
         HashMap<String,Object> result = new HashMap<>();
-        result.put("userId", userId);
-        result.put("studentNumber", studentNumber);
-
+        result.put("key",key);
+        result.put("transactionName",transactionName);
+        result.put("transactionCost",transactionCost);
         return result;
     }
 }

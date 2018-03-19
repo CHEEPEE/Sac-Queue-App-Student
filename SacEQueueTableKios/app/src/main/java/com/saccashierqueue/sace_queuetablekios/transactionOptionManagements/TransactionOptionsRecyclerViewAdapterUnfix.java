@@ -1,4 +1,4 @@
-package com.saccashierqueue.sace_queuetablekios;
+package com.saccashierqueue.sace_queuetablekios.transactionOptionManagements;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.saccashierqueue.sace_queuetablekios.R;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * Created by Keji's Lab on 19/01/2018.
  */
 
-public class TransactionOptionsRecyclerViewAdapter extends RecyclerView.Adapter<TransactionOptionsRecyclerViewAdapter.MyViewHolder> {
+public class TransactionOptionsRecyclerViewAdapterUnfix extends RecyclerView.Adapter<TransactionOptionsRecyclerViewAdapterUnfix.MyViewHolder> {
     private ArrayList<TransactionOptionDataModel> transactionOptionDataModelArrayList;
     private Context context;
     private ArrayList<Boolean> getNull;
@@ -30,11 +31,11 @@ public class TransactionOptionsRecyclerViewAdapter extends RecyclerView.Adapter<
 
         public MyViewHolder(View view){
             super(view);
-                lblTransactionOptionItem = (TextView) view.findViewById(R.id.lblTransactionOptionItem);
+                lblTransactionOptionItem = (TextView) view.findViewById(R.id.transactionListOptions);
         }
     }
 
-    public TransactionOptionsRecyclerViewAdapter(Context c, ArrayList<TransactionOptionDataModel> transactionmodel){
+    public TransactionOptionsRecyclerViewAdapterUnfix(Context c, ArrayList<TransactionOptionDataModel> transactionmodel){
         this.transactionOptionDataModelArrayList = transactionmodel;
         this.context =c;
     }

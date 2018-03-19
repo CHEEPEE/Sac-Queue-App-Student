@@ -1,14 +1,10 @@
-package com.saccashierqueue.sace_queuetablekios;
+package com.sacequeue.sace_queueapp;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-
-import com.google.firebase.database.DataSnapshot;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,17 +22,18 @@ public class Utils {
     public static String queueStudentNumber = "queueStudentNumber";
     public static String getLatestNumber = "getLatestNumber";
     public static String studentTransactions = "studentTransactions";
-    public static String transactionDetails = "transactionDetails";
     public static String transactionSelectedList = "transactionSelectedList";
-    public static void errorMessageDialog(Context context,String msg){
+    public static void errorMessageDialog(Context context,String msg,String label){
         final Dialog dialog = new Dialog(context);
         dialog.setCancelable(true);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCanceledOnTouchOutside(true);
-        dialog.setContentView(R.layout.message_dailog);
+        dialog.setContentView(R.layout.message_dialog);
+        TextView messageLabel = (TextView) dialog.findViewById(R.id.messageLabel);
         TextView lblDone = (TextView) dialog.findViewById(R.id.lblDone);
         TextView message = (TextView) dialog.findViewById(R.id.messgae);
+        messageLabel.setText(label);
         message.setText(msg);
         dialog.show();
         lblDone.setOnClickListener(new View.OnClickListener() {

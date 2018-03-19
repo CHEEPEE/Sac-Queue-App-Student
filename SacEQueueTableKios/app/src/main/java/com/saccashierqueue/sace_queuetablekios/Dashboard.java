@@ -11,18 +11,15 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
+import com.saccashierqueue.sace_queuetablekios.transactionOptionManagements.TransactionListManagement;
 
 public class Dashboard extends AppCompatActivity {
     TextView TransactionOptionManager,setKiosPin;
@@ -155,9 +152,6 @@ public class Dashboard extends AppCompatActivity {
                     }
                 });
                 dialog.show();
-
-
-
             }
         });
     }
