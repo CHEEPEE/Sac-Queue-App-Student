@@ -39,7 +39,7 @@ public class TransactionSelection extends AppCompatActivity {
     UnfixTransactionActivityRecyclerViewAdapter transactionActivityRecyclerViewAdapterUnfix;
     SelectedTransactionActivityRecyclerViewAdapter selectedTransactionActivityRecyclerViewAdapter;
     Context context;
-    TextView totalTransactionCost,lblNext;
+    TextView totalTransactionCost,lblNext,lblOther;
     RecyclerView selectedTransactionRV;
     String studentNumber;
     @Override
@@ -50,6 +50,7 @@ public class TransactionSelection extends AppCompatActivity {
         selectedTransactionRV = (RecyclerView) findViewById(R.id.selectedTransactionRV);
         listUnfixValues = (RecyclerView) findViewById(R.id.listUnfixValues);
         totalTransactionCost = (TextView) findViewById(R.id.totalTransactionCost);
+        lblOther = (TextView) findViewById(R.id.lblOther);
         studentNumber = getIntent().getStringExtra("studentNumber");
         lblNext = (TextView) findViewById(R.id.lblNext);
         context = TransactionSelection.this;
@@ -86,6 +87,38 @@ public class TransactionSelection extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+        lblOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(context);
+                dialog.setCancelable(true);
+
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.setContentView(R.layout.add_unfix_transaction);
+
+                TextView transactionLabel = (TextView) dialog.findViewById(R.id.transactionLabel);
+                final EditText transactionCost = (EditText) dialog.findViewById(R.id.transactionCost);
+
+                Button button =(Button) dialog.findViewById(R.id.btnDone);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!transactionCost.getText().toString().trim().equals("")){
+                            TransactionOptionDataModel transactionOptionDataModel = new TransactionOptionDataModel();
+                            transactionOptionDataModel.setTransactionCost(Integer.parseInt(transactionCost.getText().toString()));
+
+                            selectedTransaction.add(transactionOptionDataModel);
+                            dialog.dismiss();
+                        }else {
+
+                        }
+                        selectedTransactionActivityRecyclerViewAdapter.notifyDataSetChanged();
+                    }
+                });
+                dialog.show();
             }
         });
 
@@ -290,7 +323,15 @@ public class TransactionSelection extends AppCompatActivity {
 
             }
         });
+        Map<String,Object> detailsChildUpdateTrans = new HashMap<>();
+        detailsChildUpdateTrans.put(queueNumber,detailsValue);
+        mDatabase.child("transactions").child(Utils.getCurrentDate()).updateChildren(detailsChildUpdateTrans).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
 
+            }
+        });
+        mDatabase.child("transactions").child(Utils.getCurrentDate()).child(queueNumber).child("totalCost").setValue(getToTalCost(selectedTransaction));
 
         for ( int i = 0; i < selectedTransaction.size(); i++) {
             final int index = i;
@@ -304,7 +345,11 @@ public class TransactionSelection extends AppCompatActivity {
                 public void onSuccess(Void aVoid) {
                    if (index == selectedTransaction.size()){
                        Utils.errorMessageDialog(context,"Success");
+
                    }
+
+
+
                 }
             });
         }

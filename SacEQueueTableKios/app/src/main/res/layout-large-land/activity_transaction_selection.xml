@@ -65,6 +65,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/lblOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Other"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblNext"
+            app:layout_constraintEnd_toStartOf="@+id/lblNext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lblNext" />
+
+        <TextView
+            android:id="@+id/totalTransactionCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="10000"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblNext"
+            app:layout_constraintEnd_toStartOf="@+id/lblNext"
+            app:layout_constraintStart_toEndOf="@+id/lblOther"
+            app:layout_constraintTop_toTopOf="@+id/lblNext" />
+
     </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -91,15 +123,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/transactionListRV" />
 
-    <TextView
-        android:id="@+id/totalTransactionCost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="10000"
-        app:layout_constraintBottom_toTopOf="@+id/selectedTransactionRV"
-        app:layout_constraintEnd_toEndOf="@+id/selectedTransactionRV"
-        app:layout_constraintTop_toBottomOf="@+id/conLayHead" />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listUnfixValues"

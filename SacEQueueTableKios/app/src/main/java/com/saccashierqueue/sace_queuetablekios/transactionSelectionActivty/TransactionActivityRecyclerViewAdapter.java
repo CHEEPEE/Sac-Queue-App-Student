@@ -35,6 +35,7 @@ public class TransactionActivityRecyclerViewAdapter extends RecyclerView.Adapter
                 lblTransactionCost = (TextView) view.findViewById(R.id.transactionCost);
                 lblTransactionOptionItem = (TextView) view.findViewById(R.id.transactionListOptions);
 
+
         }
     }
 

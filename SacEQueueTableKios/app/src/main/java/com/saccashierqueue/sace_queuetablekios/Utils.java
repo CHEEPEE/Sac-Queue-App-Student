@@ -2,8 +2,10 @@ package com.saccashierqueue.sace_queuetablekios;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +30,7 @@ public class Utils {
     public static String studentTransactions = "studentTransactions";
     public static String transactionDetails = "transactionDetails";
     public static String transactionSelectedList = "transactionSelectedList";
+    public static String sendSMS = "sendSMS";
     public static void errorMessageDialog(Context context,String msg){
         final Dialog dialog = new Dialog(context);
         dialog.setCancelable(true);
@@ -51,5 +54,26 @@ public class Utils {
         DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+    public static boolean validateForm(EditText transactionName, EditText transactionCost) {
+        boolean valid = true;
+
+        String name = transactionName.getText().toString();
+        if (TextUtils.isEmpty(name)) {
+            transactionName.setError("Required.");
+            valid = false;
+        } else {
+            transactionName.setError(null);
+        }
+
+        String address = transactionCost.getText().toString();
+        if (TextUtils.isEmpty(address)) {
+            transactionCost.setError("Required.");
+            valid = false;
+        } else {
+            transactionCost.setError(null);
+        }
+
+        return valid;
     }
 }
