@@ -166,9 +166,6 @@ public class TransactionListManagement extends AppCompatActivity {
 
     private void saveTransactionOption(String transactionName,int transactionCost){
 
-
-
-
     }
     private boolean validateForm(EditText transactionName,EditText transactionCost) {
         boolean valid = true;

@@ -1,12 +1,20 @@
 package com.saccashierqueue.sace_queuetablekios.transactionSelectionActivty;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -19,10 +27,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.saccashierqueue.sace_queuetablekios.InputStudentNumberActivity;
 import com.saccashierqueue.sace_queuetablekios.R;
 import com.saccashierqueue.sace_queuetablekios.transactionOptionManagements.TransactionOptionDataModel;
 import com.saccashierqueue.sace_queuetablekios.transactionOptionManagements.TransactionOptionMapModel;
 import com.saccashierqueue.sace_queuetablekios.Utils;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,6 +69,7 @@ public class TransactionSelection extends AppCompatActivity {
         transactionActivityRecyclerViewAdapter = new TransactionActivityRecyclerViewAdapter(context,transactionOptionDataModelArrayList);
         transactionActivityRecyclerViewAdapterUnfix = new UnfixTransactionActivityRecyclerViewAdapter(context, transactionOptionDataModelArrayListUnfix);
         selectedTransactionActivityRecyclerViewAdapter = new SelectedTransactionActivityRecyclerViewAdapter(context,selectedTransaction);
+        reqPermissionSMS();
         //selected Trasactions
         selectedTransactionRV.setLayoutManager(new LinearLayoutManager(context));
         selectedTransactionRV.setAdapter(selectedTransactionActivityRecyclerViewAdapter);
@@ -97,23 +109,24 @@ public class TransactionSelection extends AppCompatActivity {
 
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setCanceledOnTouchOutside(true);
-                dialog.setContentView(R.layout.add_unfix_transaction);
-
+                dialog.setContentView(R.layout.dialog_other);
                 TextView transactionLabel = (TextView) dialog.findViewById(R.id.transactionLabel);
-                final EditText transactionCost = (EditText) dialog.findViewById(R.id.transactionCost);
+                final TextInputEditText inputTransactionName = (TextInputEditText) dialog.findViewById(R.id.inputTransactionName);
+                final TextInputEditText inputTransactionCost = (TextInputEditText) dialog.findViewById(R.id.inputTransactionCost);
 
                 Button button =(Button) dialog.findViewById(R.id.btnDone);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!transactionCost.getText().toString().trim().equals("")){
+                        if (!inputTransactionCost.getText().toString().trim().equals("") && !inputTransactionName.getText().toString().trim().equals("")){
                             TransactionOptionDataModel transactionOptionDataModel = new TransactionOptionDataModel();
-                            transactionOptionDataModel.setTransactionCost(Integer.parseInt(transactionCost.getText().toString()));
-
+                            transactionOptionDataModel.setTransactionCost(Integer.parseInt(inputTransactionCost.getText().toString()));
+                            transactionOptionDataModel.setTransactionName(inputTransactionName.getText().toString());
                             selectedTransaction.add(transactionOptionDataModel);
+                            totalTransactionCost.setText(getToTalCost(selectedTransaction)+"");
                             dialog.dismiss();
                         }else {
-
+                            Utils.errorMessageDialog(context,"Both Filed Must be Filled");
                         }
                         selectedTransactionActivityRecyclerViewAdapter.notifyDataSetChanged();
                     }
@@ -121,7 +134,6 @@ public class TransactionSelection extends AppCompatActivity {
                 dialog.show();
             }
         });
-
 
         mDatabase.child(Utils.transactionOptionsUnfix).addValueEventListener(new ValueEventListener() {
             @Override
@@ -136,6 +148,7 @@ public class TransactionSelection extends AppCompatActivity {
                     transactionOptionDataModelArrayListUnfix.add(transactionOptionDataModel);
                 }
                 transactionActivityRecyclerViewAdapterUnfix.notifyDataSetChanged();
+                totalTransactionCost.setText(getToTalCost(selectedTransaction)+"");
             }
 
             @Override
@@ -217,6 +230,7 @@ public class TransactionSelection extends AppCompatActivity {
 
                 }
                 selectedTransactionActivityRecyclerViewAdapter.notifyDataSetChanged();
+                totalTransactionCost.setText(getToTalCost(selectedTransaction)+"");
             }
         });
         dialog.show();
@@ -261,7 +275,7 @@ public class TransactionSelection extends AppCompatActivity {
                                                   mDatabase.child(Utils.getLatestNumber).child(Utils.getCurrentDate()).setValue(1).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                       @Override
                                                       public void onSuccess(Void aVoid) {
-                                                          Utils.errorMessageDialog(context,"Your Queue Number is 1");
+                                                          errorMessageDialog(context,"Your Queue Number is 1");
                                                           saveTransaction(studentNumber,(1)+"",inputNumber.getText().toString());
                                                           dialog.dismiss();
                                                       }
@@ -283,7 +297,7 @@ public class TransactionSelection extends AppCompatActivity {
                                               @Override
                                               public void onSuccess(Void aVoid) {
 
-                                                  Utils.errorMessageDialog(context,"Your Queue Number is "+(QueNumber+1));
+                                                  errorMessageDialog(context,"Your Queue Number is "+(QueNumber+1));
                                                   saveTransaction(studentNumber,(QueNumber+1)+"",inputNumber.getText().toString());
                                               }
                                           });
@@ -309,9 +323,10 @@ public class TransactionSelection extends AppCompatActivity {
         dialog.show();
     }
 
-    private void saveTransaction(String studentNumber,String queueNumber,String mobilebnumber) {
+    private void saveTransaction(String studentNumber,final String queueNumber,final String mobilebnumber) {
 
         // mDatabase.child(Utils.studentTransactions).child(Utils.getCurrentDate()).child(studentNumber).child(Utils.transactionDetails).updateChildren()
+
 
         StudentTransactionDetailsDataMapModel transactionDetailsDataMapModel = new StudentTransactionDetailsDataMapModel(studentNumber,queueNumber,mobilebnumber);
         Map<String,Object> detailsValue = transactionDetailsDataMapModel.toMap();
@@ -320,6 +335,9 @@ public class TransactionSelection extends AppCompatActivity {
         mDatabase.child(Utils.studentTransactions).child(Utils.getCurrentDate()).child(studentNumber).child(Utils.transactionDetails).updateChildren(detailsChildUpdate).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(mobilebnumber, null, "Your Queue Number is: "+queueNumber, null, null);
 
             }
         });
@@ -345,13 +363,71 @@ public class TransactionSelection extends AppCompatActivity {
                 public void onSuccess(Void aVoid) {
                    if (index == selectedTransaction.size()){
                        Utils.errorMessageDialog(context,"Success");
-
                    }
-
-
 
                 }
             });
         }
     }
+    private void errorMessageDialog(final Context context,String msg){
+        final Dialog dialog = new Dialog(context);
+        dialog.setCancelable(true);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setContentView(R.layout.message_dailog);
+        TextView lblDone = (TextView) dialog.findViewById(R.id.lblDone);
+        TextView message = (TextView) dialog.findViewById(R.id.messgae);
+        message.setText(msg);
+        dialog.show();
+        lblDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent i = new Intent(context,InputStudentNumberActivity.class);
+                startActivity(i);
+               finish();
+
+
+            }
+        });
+    }
+
+    private void sendSMS(){
+
+    }
+    private void reqPermissionSMS(){
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(TransactionSelection.this,
+                    Manifest.permission.SEND_SMS)) {
+                ActivityCompat.requestPermissions(TransactionSelection.this,
+                        new String[]{Manifest.permission.SEND_SMS},
+                        1);
+            } else {
+            }
+            ActivityCompat.requestPermissions(TransactionSelection.this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    1);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 2: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    reqPermissionSMS();
+                } else {
+                    reqPermissionSMS();
+                }
+                return;
+            }
+        }
+    }
+
 }

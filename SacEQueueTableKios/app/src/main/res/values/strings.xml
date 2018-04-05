@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Sac E-Queue Table Kios</string>
+    <string name="app_name">SPQS</string>
     <string name="title_activity_transaction_list">TransactionList</string>
 </resources>

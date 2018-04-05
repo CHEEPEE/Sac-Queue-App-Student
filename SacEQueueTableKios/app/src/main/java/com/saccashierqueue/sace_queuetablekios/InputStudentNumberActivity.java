@@ -120,12 +120,36 @@ public class InputStudentNumberActivity extends AppCompatActivity {
                 }else if (inputStudentNumber.getText().length()>8){
                     Utils.errorMessageDialog(context,"Check Inputed Student Number");
                 }else {
-                    Intent i = new Intent(context,TransactionSelection.class);
-                    i.putExtra("studentNumber",inputStudentNumber.getText().toString());
-                    startActivity(i);
-                    finish();
+
+                   mDatabase.child("students").child(inputStudentNumber.getText().toString()).child("studentNumber").addValueEventListener(new ValueEventListener() {
+                       @Override
+                       public void onDataChange(DataSnapshot dataSnapshot) {
+                           try{
+                               if (dataSnapshot.getValue(String.class).equals(inputStudentNumber.getText().toString())) {
+                                   Intent i = new Intent(context,TransactionSelection.class);
+                                   i.putExtra("studentNumber",inputStudentNumber.getText().toString());
+                                   startActivity(i);
+                                   finish();
+                               }else {
+                                   Utils.errorMessageDialog(context, "Student Number Doesn't exist");
+                               }
+
+                           }catch (NullPointerException e){
+                               Utils.errorMessageDialog(context, "Student Number Doesn't exist");
+                           }
+                       }
+
+                       @Override
+                       public void onCancelled(DatabaseError databaseError) {
+
+                       }
+                   });
+
+
+                    }
+
                 }
-            }
+
         });
 
     }

@@ -2,12 +2,14 @@ package com.sacequeue.sace_queueapp;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sacequeue.sace_queueapp.transactions.ActivityTransactionSelection;
 
 import java.util.ArrayList;
 
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     String studentNumber;
     TransactionOptionsRecyclerViewAdapter transactionOptionsRecyclerViewAdapter;
     ArrayList<TransactionOptionDataModel> transactionOptionDataModelsArray = new ArrayList<>();
+    ImageView lblLogOut;
+    ImageView getNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +42,26 @@ public class MainActivity extends AppCompatActivity {
         cashiernumber2 = (TextView) findViewById(R.id.labelWindow2);
         cashiernumber3 = (TextView) findViewById(R.id.labelWindow3);
         userQueueNumber = (TextView) findViewById(R.id.userQueueNumber);
+        lblLogOut = (ImageView) findViewById(R.id.lblLogOut);
+        lblLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent i = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        getNumber = (ImageView) findViewById(R.id.lblgetNumber);
+        getNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =  new Intent(MainActivity.this, ActivityTransactionSelection.class);
+                i.putExtra("studentNumber",studentNumber);
+                startActivity(i);
 
-
+            }
+        });
         transactionOptionsRecyclerViewAdapter = new TransactionOptionsRecyclerViewAdapter(context,transactionOptionDataModelsArray);
 
 
@@ -94,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         userQueueNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDetailsDialog(queNumber,"43333");
+                showDetailsDialog(queNumber,"");
             }
         });
 
@@ -147,11 +170,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCanceledOnTouchOutside(true);
         dialog.setContentView(R.layout.details_dialog);
-        RecyclerView transactionListRV = (RecyclerView) dialog.findViewById(R.id.transactionListRV);
-        transactionListRV.setLayoutManager(new LinearLayoutManager(context));
-        transactionListRV.setAdapter(transactionOptionsRecyclerViewAdapter);
-        transactionOptionsRecyclerViewAdapter.notifyDataSetChanged();
-
         TextView lblDone = (TextView) dialog.findViewById(R.id.lblDone);
         TextView messageLabel = (TextView)dialog.findViewById(R.id.messageLabel);
         TextView lblTransactionCost = (TextView) dialog.findViewById(R.id.transactionCost);
@@ -168,4 +186,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }

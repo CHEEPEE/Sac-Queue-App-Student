@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,7 +21,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     String TAG = "SignUpActivity";
     EditText studentNumber,email,password,confirmpassword;
+    TextView textHere;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
         studentNumber = (EditText) findViewById(R.id.input_student_number);
         email = (EditText) findViewById(R.id.inpt_email);
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
+        textHere = (TextView) findViewById(R.id.lblMessage);
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +93,49 @@ public class SignUpActivity extends AppCompatActivity {
                        signUpBtn.setEnabled(true);
                    }
                }
+            }
+        });
+        textHere.setText("");
+        studentNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(final Editable s) {
+                if (s.toString().toString().length()!=0){
+                    FirebaseDatabase.getInstance().getReference().child("students").child(s.toString()).child("studentNumber").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            try{
+
+                                if (dataSnapshot.getValue(String.class).equals(s.toString())){
+                                    textHere.setText("");
+                                    signUpBtn.setEnabled(true);
+                                }
+
+
+                            }catch (NullPointerException e){
+                                textHere.setText("Student Number Doesn't Exist");
+                                signUpBtn.setEnabled(false);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }else {
+                    textHere.setText("");
+                }
+
             }
         });
 

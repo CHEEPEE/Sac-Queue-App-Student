@@ -19,10 +19,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.saccashierqueue.sace_queuetablekios.manageStudents.ManageStudents;
 import com.saccashierqueue.sace_queuetablekios.transactionOptionManagements.TransactionListManagement;
 
 public class Dashboard extends AppCompatActivity {
-    TextView TransactionOptionManager,setKiosPin;
+    TextView TransactionOptionManager,setKiosPin,lblManageStudents;
     Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +32,20 @@ public class Dashboard extends AppCompatActivity {
         context = Dashboard.this;
         setKiosPin = (TextView) findViewById(R.id.setKiosPin);
         TransactionOptionManager = (TextView) findViewById(R.id.TransactionOptionManager);
+        lblManageStudents = (TextView) findViewById(R.id.addStudents);
         TransactionOptionManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context,TransactionListManagement.class);
                 startActivity(i);
+            }
+        });
+        lblManageStudents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Dashboard.this, ManageStudents.class);
+                startActivity(i);
+
             }
         });
         setKiosPin.setOnClickListener(new View.OnClickListener() {

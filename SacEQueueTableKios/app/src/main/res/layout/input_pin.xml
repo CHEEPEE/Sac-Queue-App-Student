@@ -62,4 +62,14 @@
         app:layout_constraintEnd_toEndOf="@+id/layinputPin"
         app:layout_constraintTop_toBottomOf="@+id/layinputPin" />
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:translationZ="10dp"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:background="@color/colorWhite"
+        android:layout_height="match_parent" />
+
+
 </android.support.constraint.ConstraintLayout>

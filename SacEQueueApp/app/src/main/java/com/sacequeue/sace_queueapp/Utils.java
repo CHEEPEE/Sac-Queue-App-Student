@@ -21,12 +21,12 @@ public class Utils {
     public static String kiosPinCode  = "kiosPin";
     public static String queueStudentNumber = "queueStudentNumber";
     public static String getLatestNumber = "getLatestNumber";
+    public static String transactionDetails = "transactionDetails";
     public static String studentTransactions = "studentTransactions";
     public static String transactionSelectedList = "transactionSelectedList";
     public static void errorMessageDialog(Context context,String msg,String label){
         final Dialog dialog = new Dialog(context);
         dialog.setCancelable(true);
-
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCanceledOnTouchOutside(true);
         dialog.setContentView(R.layout.message_dialog);
