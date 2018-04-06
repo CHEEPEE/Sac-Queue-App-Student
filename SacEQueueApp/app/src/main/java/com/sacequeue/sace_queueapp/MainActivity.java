@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         TextView lblDone = (TextView) dialog.findViewById(R.id.lblDone);
         TextView messageLabel = (TextView)dialog.findViewById(R.id.messageLabel);
         TextView lblTransactionCost = (TextView) dialog.findViewById(R.id.transactionCost);
-        lblTransactionCost.setText("P "+totalCost);
+        lblTransactionCost.setText(""+totalCost);
         TextView message = (TextView) dialog.findViewById(R.id.messgae);
         message.setText(msg);
         messageLabel.setText("Your Queue number is");
